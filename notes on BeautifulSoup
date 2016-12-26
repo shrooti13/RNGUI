@@ -1,0 +1,25 @@
+Notes for BeautifulSoup
+
+Installed it like so per BS' own instructions:
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup
+* Inside Terminal on the command prompt ran this:
+ easy_install beautifulsoup4
+
+* Installed pip like so:
+https://en.wikipedia.org/wiki/Pip_(package_manager)
+
+https://packaging.python.org/installing/
+sudo curl https://bootstrap.pypa.io/get-pip.py | python3
+
+* The installation of BeautifulSoup was buggy because i got an older version. So I did:
+pip uninstall bs4
+pip install beautifulsoup....whl (from inside the Downloads folder)
+
+and now the bs4 programs are working. :D yay!!
+
+* http://stackoverflow.com/questions/35355225/edit-and-create-html-file-using-python
+
+* What the heck is Unicode:
+
+* Here's info on regex for python:
+https://docs.python.org/3/library/re.html?highlight=regular%20expression

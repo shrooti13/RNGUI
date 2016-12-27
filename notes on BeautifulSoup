@@ -23,3 +23,32 @@ and now the bs4 programs are working. :D yay!!
 
 * Here's info on regex for python:
 https://docs.python.org/3/library/re.html?highlight=regular%20expression
+
+* The final roadblock: the changes to tags are not getting written back into the file
+http://stackoverflow.com/questions/31872045/updating-html-file-using-beautifulsoup
+
+* Many things, but first, this is how you insert the <a href>
+http://stackoverflow.com/questions/21356014/how-can-i-insert-a-new-tag-into-a-beautifulsoup-object
+
+* OK: so here's how to save the changes to the HTML file:
+http://stackoverflow.com/questions/14369447/how-to-save-back-changes-made-to-a-html-file-using-beautifulsoup-in-python
+
+Now print(soup.prettify()) will show changed links. To save the changes to a file:
+
+htmlDoc.close()
+
+html = soup.prettify("utf-8")
+with open("output.html", "wb") as file:
+    file.write(html)
+
+* Cheat sheet:
+http://youkilljohnny.blogspot.com/2014/03/beautifulsoup-cheat-sheet-parse-html-by.html
+
+* Converting a string into a beautifulSoup object:
+http://stackoverflow.com/questions/37997702/how-to-convert-a-string-into-a-beautifulsoup-object
+
+* Regex:
+https://docs.python.org/3/library/re.html?highlight=regular%20expression
+
+Maybe later you can learn to do this: making chrome extensions using python
+https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjPrMKkxpXRAhXrzlQKHUNTDdUQFggfMAA&url=https%3A%2F%2Fpythonspot.com%2Fen%2Fcreate-a-chrome-plugin-with-python%2F&usg=AFQjCNFoDwuRfdGxcWQ9ACjAjBlda1H8Dw&sig2=ePw3_3nkSqJ_UA0FcyBJpw

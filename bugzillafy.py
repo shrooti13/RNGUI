@@ -22,20 +22,43 @@ for tag in soup.find_all('strong'):
                   continue
 
 
-        bugzilla_query = "<a href=https://bugzilla.eng.vmware.com/show_bug.cgi?id="+bug_No[0]+">"+bug_No[0]+"</a>"
+
         #trying to see what the string looks like: it's enclosed within the <strong>..</strong>
         #print ("this is how the string looks with tags:", tag)
-        print (bugzilla_query)
+        #print (bugzilla_query)
         # so you need to search from bug_No until the </strong> tag and extract everything that's there for the second string
         new_string = str(tag)
         bugpos = new_string.find(bug_No[0])
         strongpos = new_string.find('</strong>', bugpos)
         rest_of_string = new_string[bugpos+7:strongpos]
 
-        new_tag_contents =   "<strong>Issue "+bugzilla_query+rest_of_string+"</strong>"
+
+# before, and this didn't work properly showing < > all over
+#        bugzilla_query = soup.new_tag("<a href=https://bugzilla.eng.vmware.com/show_bug.cgi?id="+bug_No[0]+">"+"Issue "+bug_No[0]+ rest_of_string + "</a>")
+
+# After: http://stackoverflow.com/questions/21356014/how-can-i-insert-a-new-tag-into-a-beautifulsoup-object
+#soup = BeautifulSoup("<b></b>")
+#original_tag = soup.b
+
+#new_tag = soup.new_tag("a", href="http://www.example.com")
+#original_tag.append(new_tag)
+#original_tag
+# <b><a href="http://www.example.com"></a></b>
+
+#new_tag.string = "Link text."
+#original_tag
+# <b><a href="http://www.example.com">Link text.</a></b>
+
+        bugzilla_query = soup.new_tag("a", href="href=https://bugzilla.eng.vmware.com/show_bug.cgi?id=")
+
+        tag_string = "Issue "+bug_No[0]+ rest_of_string
+        bugzilla_query.append(tag_string)
+
+
+        #new_tag_contents =  bugzilla_query+rest_of_string
         #tag = new_tag_contents <---- not working
-        tag.replace_with(new_tag_contents)
-        #print (tag)
+        tag.contents[0].replace_with(bugzilla_query)
+        #print (tag.name)
         #input ('wait')
 
     #    new_tag_contents = soup.new_tag("<strong>Issue "+bugzilla_query+rest_of_string+"</strong>")

@@ -28,9 +28,9 @@ for tag in soup.find_all('strong'):
 #        bug_No = list(map(int,(re.findall('\\S ([0-9]+):', tag.contents[0]))))
 #OK, there's no need to conver bug_No into a number, because we're not doing any operation on it, just attaching to the bugzilla query so string is what we really need! duh!
         bug_No = (re.findall('\\S ([0-9]+):', tag.contents[0]))
-        print (bug_No[0])
+        print ("bug_No[0]:", bug_No[0])
         input("press a key")
-        print (tag.contents[0])
+#        print (tag.contents[0])
 
 # Now that we got the bug#, we need to replace the contents of this tag with the bugzilla query for the said bug#
 # we need EVERYTHING in the string, except the bug# that needs to be the new bugzilla query
@@ -61,9 +61,28 @@ for tag in soup.find_all('strong'):
 #”
 
 #Excerpt From: Charles Severance. “Python for Informatics.” Michigan Publishing, 2014. iBooks. https://itun.es/us/ZZXdH.n
+
 ##########
 
-        bugpos = tag.contents[0].find(bug_No[0])
-        print ("this is where bug_No starts: ", bugpos)
-        brpos = tag.contents[0].find('<br \>')
-        print ("this is where the <br> tag starts", brpos)
+#        bugpos = tag.contents[0].find(bug_No[0])
+#        print ("this is where bug_No starts: ", bugpos)
+# unfortunately, this won't work because what I have thru tag.contents[0] is the actual string and not the tags so I can't find from bugno until the <br /> tag as I thought I could.
+# Now thinking about how else to extract the rest of the string... hmmmmmmmmmmmmmmmmmm
+#        brpos = tag.contents[0].find('<br /> ', bugpos)
+#        print ("this is where the <br> tag starts", brpos)
+
+
+# so trying to see what the string looks like: it's enclose within the <strong>..</strong>
+    #    print ("this is how the string looks with tags:", tag)
+
+# so you need to search from bug_No until the </strong> tag and extract everything that's there for the second string
+        new_string = str(tag)
+#        new_string = '<strong>Issue 1586149: DFW UI Enhancements for better user experience.</strong>'
+        #print ("new_string is: ", new_string)
+        #print (bug_No[0])
+        input("the above is the bug_No[0]")
+        bugpos = new_string.find(bug_No[0])
+        #print ("this is where bug_No starts: ", bugpos)
+        strongpos = new_string.find('</strong>', bugpos)
+        #print ("this is where the </strong> tag starts", strongpos)
+        print ("rest of the string: ", new_string[bugpos+7:strongpos])
